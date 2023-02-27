@@ -21,10 +21,10 @@ void solve()
     int n; cin >> n;
     vector<int> a(n);
     for(int i=0; i<n; i++) a[i]=i+1;
-    // reverse(a.begin(), a.end());
+    reverse(a.begin(), a.end());
     for(int i=0; i<n; i++) cout << a[i];
     cout << " ";
-    while(next_permutation(a.begin(), a.end()))
+    while(prev_permutation(a.begin(), a.end()))
     {
         for(int i=0; i<n; i++) cout << a[i];
         cout << " ";

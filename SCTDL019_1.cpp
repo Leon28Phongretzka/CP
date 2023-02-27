@@ -14,42 +14,20 @@ typedef long long ll;
 #define Len 100005
 const double pi=3.14159265358979323846;
 const int MOD = 1000000007;
-string nextGreater(string num)
-{
-    int l = num.size();
-    // for (int i=l-1; i>=0; i--)
-    // {
-    //     if (num.at(i) == '0')
-    //     {
-    //         num.at(i) = '1';
-    //         break;
-    //     }
-    //     else num.at(i) = '0';
-    // if (i < 0)
-    //     num = "1" + num;
-    // }
-    // return num;
-}
-string sinh_next(string s)
-{
-    int l = s.size();
-    for(int i=l-1; i>=0; i--)
-    {
-        if(s[i] == '0')
-        {
-            s[i] = '1';
-            break;
-        }
-        else s[i] = '0';
-    }
-    // if(s[0] == '0') s = "1" + s;
-    return s;
-}
 void solve()
 {
-    string s; cin >> s;
-    cout << sinh_next(s) << endl;
-    
+	int n; cin >> n;
+	vector<int> a(n);
+	forn(i,0,n) cin >> a[i];
+	if(next_permutation(a.begin(), a.end()))
+	{
+		fora(i, a) cout << i << " ";
+		cout << endl;
+	}
+	else
+	{
+		fora(i,a) cout << i << " ";
+	}
 }
 int main()
 {

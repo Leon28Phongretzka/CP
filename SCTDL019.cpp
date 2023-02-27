@@ -14,29 +14,17 @@ typedef long long ll;
 #define Len 100005
 const double pi=3.14159265358979323846;
 const int MOD = 1000000007;
-
-void bin2dec(int n, string a, int i)
-{
-    if(i==0)
-    {
-        for(int j=0; j<n; j++) cout << a[j];
-        cout << " ";
-    }
-    else
-    {
-        a[i]='A';
-        bin2dec(n,a,i--);
-        a[i]='B';
-        bin2dec(n,a,i--);
-    }
-}
-
 void solve()
 {
-    int n; cin >> n;
-    string a(n,'0');
-    bin2dec(n,a,n);
-
+	int n; cin >> n;
+	vector<int> a(n);
+	forn(i,0,n) cin >> a[i];
+	while(next_permutation(a.begin(), a.end()))
+	{
+		fora(i, a) cout << i << " ";
+		cout << endl;
+	}
+	cout << endl;
 }
 int main()
 {

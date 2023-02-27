@@ -34,8 +34,9 @@ void bin2dec(int n, string a, int i)
 void solve()
 {
     int n; cin >> n;
-    vector<int> a(N);
-
+    string a(n,'A');
+    bin2dec(n,a,0);
+    cout << endl;
 }
 int main()
 {
