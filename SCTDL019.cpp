@@ -19,12 +19,15 @@ void solve()
 	int n; cin >> n;
 	vector<int> a(n);
 	forn(i,0,n) cin >> a[i];
-	while(next_permutation(a.begin(), a.end()))
+	if(next_permutation(a.begin(), a.end()))
 	{
 		fora(i, a) cout << i << " ";
 		cout << endl;
 	}
-	cout << endl;
+	else
+	{
+		fora(i,a) cout << i << " ";
+	}
 }
 int main()
 {

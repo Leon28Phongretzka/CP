@@ -18,22 +18,26 @@ typedef long long ll;
 #define Len 100005
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
-void binaryNum(int n, string s, int slash1, int slash0)
+
+// Check if binary string has #0 == #1
+void check(string s)
 {
-	if (s.length() == n)
+	int n = s.size();
+	int cnt0 = 0, cnt1 = 0;
+	forn(i, 0, n)
 	{
-		cout << (s) << " ";
-		return;
+		if (s[i] == '0')
+			cnt0++;
+		else
+			cnt1++;
 	}
-	if (slash0 < n / 2)
-		binaryNum(n, s + '0', slash1, slash0 + 1);
-	if (slash1 < n / 2)
-		binaryNum(n, s + '1', slash1 + 1, slash0);
+	if (cnt0 == cnt1)
+		cout << s << " ";
 }
+
 void solve()
 {
-	int n;
-	cin >> n;
+	int n; cin >> n;
 	if (n & 1)
 	{
 		cout << -1 << endl;
@@ -41,8 +45,16 @@ void solve()
 	}
 	else
 	{
-		binaryNum(n, "", 0, 0);
+		string s = "";
+		for(int i=0; i<n/2; i++) s += '0';
+		for(int i=0; i<n/2; i++) s += '1';
+		// check all possible string
+		do
+		{
+			check(s);
+		} while (next_permutation(s.begin(), s.end()));
 		cout << endl;
+	
 	}
 }
 int main()

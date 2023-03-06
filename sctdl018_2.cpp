@@ -48,41 +48,20 @@ const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 void solve()
 {
-    ll n;
-    cin >> n;
-    vl v;
-    ll v1[n + 3][n + 3] = {0};
-    forn(i, 0, n)
+    ll n; cin >> n;
+    vector<long long> a(n+3), b(n+3);
+    for (int i = 0; i<n; i++) cin >> a[i];
+    for(int i=0; i<n; i++)
     {
-        ll x;
-        cin >> x;
-        v.pb(x);
-    }
-    // fora(i,v) cout << i << " ";
-    forn(i, 0, n)
-    {
-        v1[0][i] = v[i];
-    }
-    forn(i, 1, n)
-    {
-        forn(j, 0, n - 1)
+        cout << "[" << a[0];
+        for(int j=1; j<n-i; j++)
         {
-            v1[i][j] = v1[i - 1][j] + v1[i - 1][j + 1];
+            cout << " " << a[j];
+            b[j-1] = a[j] + a[j-1];
         }
+        cout << "]" << endl;
+        for(int j=0; j<n-i; j++) a[j] = b[j];
     }
-    forn(i, 0, n-1)
-    {
-        cout << "[";
-        forn(j, 0, n - i)
-        {
-            cout << v1[i][j];
-            if (j != n - 1 - i)
-                cout << " ";
-        }
-        cout << "]" << " ";
-        cout << endl;
-    }
-    cout << "[" << v1[n-1][0] << "]";
 }
 int main()
 {
