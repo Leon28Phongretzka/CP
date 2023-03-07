@@ -19,7 +19,6 @@ typedef long long ll;
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 
-// Check if binary string has #0 == #1
 void check(string s)
 {
 	int n = s.size();
@@ -48,7 +47,6 @@ void solve()
 		string s = "";
 		for(int i=0; i<n/2; i++) s += '0';
 		for(int i=0; i<n/2; i++) s += '1';
-		// check all possible string
 		do
 		{
 			check(s);
