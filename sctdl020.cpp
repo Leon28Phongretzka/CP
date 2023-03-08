@@ -40,57 +40,73 @@ typedef vector<string> vs;
 #define eb emplace_back
 #define ob pop_back
 #define sz(s) ((int)(s.size()))
-#define forn(i, a, b) for (ll i = a; i < b; i++)
-#define forr(i, a, b) for (ll i = a; i >= b; i--)
+#define UM uno\nrdered_map
+#define US uno\nrdered_set
+#define forn(i, n) for (int i = 1; i <= int(n); i++)
 #define fora(i, n) for (auto i : n)
-#define Len 100005
+#define Len 1000005
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
+int tt;
+bool prime[1005];
+void Sett()
+{
+    memset(prime, true, sizeof(prime));
+    for (int p = 2; p * p <= 1000; p++)
+    {
+        if (prime[p] == true)
+        {
+            for (int i = p * p; i <= 1000; i += p)
+                prime[i] = false;
+        }
+    }
+}
+ll power(ll a, ll n)
+{
+    ll ans = 1;
+    while (n)
+    {
+        if (n & 1)
+            ans = (ans * a);
+        a = (a * a);
+        n >>= 1;
+    }
+    return ans;
+}
+int countWaysUtil(int x, int n, int num)
+{
+    // Base cases
+    int val = (x - pow(num, n));
+    if (val == 0)
+        return 1;
+    if (val < 0)
+        return 0;
+
+    // Consider two possibilities, num is
+    // included and num is not included.
+    return countWaysUtil(val, n, num + 1) +
+           countWaysUtil(x, n, num + 1);
+}
+
+// Returns number of ways to express
+// x as sum of n-th power of two.
+int countWays(int x, int n)
+{
+    return countWaysUtil(x, n, 1);
+}
 void solve()
 {
-    ll n;
-    cin >> n;
-    vl v;
-    ll v1[n + 3][n + 3] = {0};
-    forn(i, 0, n)
-    {
-        ll x;
-        cin >> x;
-        v.pb(x);
-    }
-    // fora(i,v) cout << i << " ";
-    forn(i, 0, n)
-    {
-        v1[0][i] = v[i];
-    }
-    forn(i, 1, n)
-    {
-        forn(j, 0, n - 1)
-        {
-            v1[i][j] = v1[i - 1][j] + v1[i - 1][j + 1];
-        }
-    }
-    forn(i, 0, n-1)
-    {
-        cout << "[";
-        forn(j, 0, n - i)
-        {
-            cout << v1[i][j];
-            if (j != n - 1 - i)
-                cout << " ";
-        }
-        cout << "]" << " ";
-        cout << endl;
-    }
-    cout << "[" << v1[n-1][0] << "]";
+    ll n, m;
+    cin >> n >> m;
+    cout << countWays(n, m) << endl;
 }
 int main()
 {
     FAST_IO;
+    // Sett();
     // freopen("time.in", "r", stdin); freopen("time.out", "w", stdout);
-    ll tt;
     cin >> tt;
-    for (int i = 1; i <= tt; i++)
+    while (tt--)
     {
         solve();
     }
