@@ -19,38 +19,35 @@ typedef long long ll;
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 
-
-// use DP to find the longest string has descending order
-
-void szn080(string s)
+int countArr(vector<int> arr, int k, int s)
 {
-    int n = sz(s);
-    vector<ll> dp(n+1, 1);
-    ll res = 1;
-    for(int i=1; i<n; i++)
+    int n = arr.size();
+    vector<vector<int>> dp(k + 1, vector<int>(s + 1, 0));
+    dp[0][0] = 1;
+    for (int i = 1; i <= n; i++)
     {
-        for(int j=0; j<i; j++)
+        for (int j = k; j >= 1; j--)
         {
-            if(s[j] <= s[i] - 1)
+            for (int x = s; x >= arr[i - 1]; x--)
             {
-                dp[i] = max(dp[i], dp[j]+1);
+                dp[j][x] += dp[j - 1][x - arr[i - 1]];
             }
         }
-        // cout << dp[i] << " ";
-        res = max(res, dp[i]);
     }
-    cout << res << endl;
+    return dp[k][s];
 }
-
 
 void solve()
 {
-    string s; cin >> s;
-    int n = sz(s);
-    transform(s.begin(), s.end(), s.begin(), ::tolower);
-    szn080(s);
-
+    int n, k, s;
+    cin >> n >> k >> s;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+    sort(arr.begin(), arr.end());
+    cout << countArr(arr, k, s) << endl;
 }
+
 int main()
 {
     FAST_IO;
@@ -61,3 +58,4 @@ int main()
     // solve();
     // freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 }
+sc
