@@ -6,6 +6,7 @@ using namespace std;
     cout.tie(0);                  \
     cerr.tie(0)
 typedef long long ll;
+typedef long double ld;
 #define mp make_pair
 #define gl getline
 #define pb push_back
@@ -21,13 +22,31 @@ const int MOD = 1000000007;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<int> a(n), b(n), c(n), d(n);
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
-    sort(a.begin(), a.end());
-    
+    ld n, k;
+    cin >> n >> k;
+    vector<ld> v1;
+    vector<ld> v2;
+    for (ll i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        v1.pb(x);
+        v2.pb(abs(x - k));
+    }
+    for(ll i=0; i<n-1; i++)
+    {
+        for(ll j=i+1; j<n; j++)
+        {
+            if(v2[i] > v2[j])
+            {
+                swap(v2[i], v2[j]);
+                swap(v1[i], v1[j]);
+            }
+        }
+    }
+    for (auto i : v1)
+        cout << i << " ";
+    cout << endl;
 }
 
 int main()
