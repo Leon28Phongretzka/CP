@@ -6,6 +6,7 @@ using namespace std;
     cout.tie(0);                  \
     cerr.tie(0)
 typedef long long ll;
+typedef long double ld;
 #define mp make_pair
 #define gl getline
 #define pb push_back
@@ -21,16 +22,30 @@ const int MOD = 1000000007;
 
 void solve()
 {
-    int n; cin >> n;
-    vector<int> a(n); for(int i=0; i<n; i++) cin >> a[i];
-    vector<int> b(n); for(int i=0; i<n; i++) cin >> b[i];
-    int ans = 0;
-    while(a != b){
-        next_permutation(a.begin(), a.end());
-        ans++;
-    }
-    cout << ans << endl;
+    int n, k;
+    cin >> n >> k;
+    vector<int> a1(n);
+    vector<int> a2(k);
+    for (int i = 0; i < n; i++)
+        cin >> a1[i];
+    for (int i = 0; i < k; i++)
+        cin >> a2[i];
+    set<int> a3;
+    for (int i = 0; i < n; i++)
+        a3.insert(a1[i]);
+    for (int i = 0; i < k; i++)
+        a3.insert(a2[i]);
+    // cout << endl;
+    set<int> a4;
+    set_intersection(a1.begin(), a1.end(), a2.begin(), a2.end(), inserter(a4, a4.begin()));
+    for (auto i : a3)
+        cout << i << " ";
+    cout << endl;
+    for (auto i : a4)
+        cout << i << " ";
+    cout << endl;
 }
+
 int main()
 {
     FAST_IO;

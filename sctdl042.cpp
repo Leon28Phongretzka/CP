@@ -6,6 +6,7 @@ using namespace std;
     cout.tie(0);                  \
     cerr.tie(0)
 typedef long long ll;
+typedef long double ld;
 #define mp make_pair
 #define gl getline
 #define pb push_back
@@ -21,16 +22,29 @@ const int MOD = 1000000007;
 
 void solve()
 {
-    int n; cin >> n;
-    vector<int> a(n); for(int i=0; i<n; i++) cin >> a[i];
-    vector<int> b(n); for(int i=0; i<n; i++) cin >> b[i];
-    int ans = 0;
-    while(a != b){
-        next_permutation(a.begin(), a.end());
-        ans++;
-    }
+    ll n;
+    cin >> n;
+    vector<ll> a(n), b(n);
+    for (ll i = 0; i < n; i++)
+        cin >> a[i];
+    for (ll i = 0; i < n; i++)
+        cin >> b[i];
+    ll k1 = max_element(a.begin(), a.end()) - a.begin();
+    ll k2 = max_element(b.begin(), b.end()) - b.begin();
+    k1 = a[k1];
+    k2 = b[k2];
+    if (k1 > k2)
+        swap(a, b);
+    sort(a.begin(), a.end());
+    sort(b.rbegin(), b.rend());
+    // for(ll i=0; i<n; i++) cout << a[i] << " "; cout << endl;
+    // for(ll i=0; i<n; i++) cout << b[i] << " "; cout << endl;
+    ll ans = 0;
+    for (ll i = 0; i < n; i++)
+        ans += a[i] * b[i];
     cout << ans << endl;
 }
+
 int main()
 {
     FAST_IO;

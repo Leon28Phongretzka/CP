@@ -6,6 +6,7 @@ using namespace std;
     cout.tie(0);                  \
     cerr.tie(0)
 typedef long long ll;
+typedef long double ld;
 #define mp make_pair
 #define gl getline
 #define pb push_back
@@ -19,18 +20,31 @@ typedef long long ll;
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 
+bool isPos(string s)
+{
+    map<char, int> frequenciez;
+    int max_frequenciez = 0;
+    for (int j = 0; j < (s.length()); j++)
+    {
+        frequenciez[s[j]]++;
+        if (frequenciez[s[j]] > max_frequenciez)
+            max_frequenciez = frequenciez[s[j]];
+    }
+    if (max_frequenciez <= (s.length() - max_frequenciez + 1))
+        return true;
+    return false;
+}
 void solve()
 {
-    int n; cin >> n;
-    vector<int> a(n); for(int i=0; i<n; i++) cin >> a[i];
-    vector<int> b(n); for(int i=0; i<n; i++) cin >> b[i];
-    int ans = 0;
-    while(a != b){
-        next_permutation(a.begin(), a.end());
-        ans++;
-    }
-    cout << ans << endl;
+    string s;
+    cin >> s;
+    ll n = sz(s);
+    if (isPos(s))
+        cout << 1 << endl;
+    else
+        cout << -1 << endl;
 }
+
 int main()
 {
     FAST_IO;

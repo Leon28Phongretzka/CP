@@ -6,6 +6,9 @@ using namespace std;
     cout.tie(0);                  \
     cerr.tie(0)
 typedef long long ll;
+typedef long double ld;
+typedef vector<pair<ll, ll>> vpll;
+typedef map<long long, long long> mpll;
 #define mp make_pair
 #define gl getline
 #define pb push_back
@@ -21,16 +24,32 @@ const int MOD = 1000000007;
 
 void solve()
 {
-    int n; cin >> n;
-    vector<int> a(n); for(int i=0; i<n; i++) cin >> a[i];
-    vector<int> b(n); for(int i=0; i<n; i++) cin >> b[i];
-    int ans = 0;
-    while(a != b){
-        next_permutation(a.begin(), a.end());
-        ans++;
+    ll n;
+    cin >> n;
+    vector<ll> a(n), b(n);
+    vector<pair<ll, ll>> v;
+    ll res = 0, k = 0;
+    for (ll i = 0; i < n; i++)
+        cin >> a[i];
+    for (ll i = 0; i < n; i++)
+        cin >> b[i];
+    for (ll i = 0; i < n; i++)
+        v.pb(mp(a[i], b[i]));
+    sort(v.begin(), v.end(), [](pair<ll, ll> &a, pair<ll, ll> &b)
+         { return a.second < b.second; });
+    // for (ll i = 0; i < n; i++)
+    //     cout << v[i].first << " " << v[i].second << endl;
+    for (ll i = 0; i < n; i++)
+    {
+        if (v[i].first >= k)
+        {
+            res++;
+            k = v[i].second;
+        }
     }
-    cout << ans << endl;
+    cout << res << endl;
 }
+
 int main()
 {
     FAST_IO;

@@ -21,13 +21,23 @@ const int MOD = 1000000007;
 
 void solve()
 {
-    int n; cin >> n;
-    vector<int> a(n); for(int i=0; i<n; i++) cin >> a[i];
-    vector<int> b(n); for(int i=0; i<n; i++) cin >> b[i];
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+    int l = 0, r = n - 1;
     int ans = 0;
-    while(a != b){
-        next_permutation(a.begin(), a.end());
-        ans++;
+    while (l <= r)
+    {
+        int mid = (l + r) / 2;
+        if (a[mid] == 0)
+        {
+            ans = mid + 1;
+            l = mid + 1;
+        }
+        else
+            r = mid - 1;
     }
     cout << ans << endl;
 }
