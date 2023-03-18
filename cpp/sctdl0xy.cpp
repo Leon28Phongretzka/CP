@@ -18,29 +18,24 @@ typedef long long ll;
 #define Len 1005
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
-
-// use DP to find the biggest sum of subarray < n
-void s070(vector<int> a, int n)
+const int fraud = 123456789;
+ll power(ll a, ll b)
 {
-    int dp[n + 1];
-    dp[0] = 0;
-    for (int i = 1; i <= n; i++)
-    {
-        dp[i] = max(dp[i - 1], dp[i - 1] + a[i - 1]);
-    }
-    cout << dp[n] << endl;
+    if (b == 0)
+        return 1;
+    ll tmp = power(a, b / 2);
+    if (b % 2 == 0)
+        return (tmp * tmp) % fraud;
+    else
+        return (((tmp * tmp) % fraud) * a) % fraud;
 }
 
 void solve()
 {
-    ll x, n, k;
-    cin >> x >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
-    sort(a.begin(), a.end());
-    // for (int i = 0; i < n; i++) cout << a[i] << " "; cout << endl;
-    s070(a, n);
+    ll n; cin >> n;
+    ll res = 0;
+    cout << power(2, n - 1) << endl;
+
 }
 
 int main()

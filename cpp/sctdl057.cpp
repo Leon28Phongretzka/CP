@@ -15,34 +15,33 @@ typedef long long ll;
 #define forn(i, a, b) for (ll i = a; i < b; i++)
 #define forr(i, a, b) for (ll i = a; i >= b; i--)
 #define fora(i, n) for (auto i : n)
-#define Len 1005
+#define Len 100005
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
-
-// use DP to find the biggest sum of subarray < n
-void s070(vector<int> a, int n)
-{
-    int dp[n + 1];
-    dp[0] = 0;
-    for (int i = 1; i <= n; i++)
-    {
-        dp[i] = max(dp[i - 1], dp[i - 1] + a[i - 1]);
-    }
-    cout << dp[n] << endl;
-}
-
 void solve()
 {
-    ll x, n, k;
-    cin >> x >> n;
+    int n, k;
+    cin >> n >> k;
     vector<int> a(n);
     for (int i = 0; i < n; i++)
         cin >> a[i];
-    sort(a.begin(), a.end());
-    // for (int i = 0; i < n; i++) cout << a[i] << " "; cout << endl;
-    s070(a, n);
+    if (k < a[0])
+    {
+        cout << -1 << endl;
+        return;
+    }
+    int max = a[0];
+    int max_index = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (a[i] > max && a[i] <= k)
+        {
+            max = a[i];
+            max_index = i;
+        }
+    }
+    cout << max_index+1 << endl;
 }
-
 int main()
 {
     FAST_IO;
