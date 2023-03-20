@@ -50,21 +50,21 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<ll> v1(n+6), v2(n+6);
-    for (ll i=0; i<n; i++) cin >> v1[i];
-    for (ll i=0; i<n; i++)
+    vector<int> v1(n), v2(n);
+    for (int i = 0; i < n; i++)
+        cin >> v1[i];
+    for (int i = 0; i < n; i++)
     {
-        cout <<"[" << v1[0];
-        for(ll j=1; j<n-i; j++)
+        cout << "[" << v1[0];
+        for (int j = 1; j < n - i; j++)
         {
             cout << " " << v1[j];
             v2[j - 1] = v1[j] + v1[j - 1];
         }
         cout << "]" << endl;
-        for(ll j=0; j<n-i; j++) v1[j] = v2[j];
-
+        for (int j = 0; j < n - i; j++)
+            v1[j] = v2[j];
     }
-
 }
 int main()
 {
