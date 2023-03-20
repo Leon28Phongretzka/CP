@@ -48,13 +48,23 @@ const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 void solve()
 {
-    ll n; cin >> n;
-    vl v;
-    for(int i=0; i<n; i++)
+    int n;
+    cin >> n;
+    vector<ll> v1(n+6), v2(n+6);
+    for (ll i=0; i<n; i++) cin >> v1[i];
+    for (ll i=0; i<n; i++)
     {
-        ll x; v.pb(x);
+        cout <<"[" << v1[0];
+        for(ll j=1; j<n-i; j++)
+        {
+            cout << " " << v1[j];
+            v2[j - 1] = v1[j] + v1[j - 1];
+        }
+        cout << "]" << endl;
+        for(ll j=0; j<n-i; j++) v1[j] = v2[j];
+
     }
-    
+
 }
 int main()
 {
