@@ -96,3 +96,20 @@ rl.on('line', (line) => {
 
 });
 
+// Input
+// V a b c d e
+// E a,b,6 a,c,7 b,c,8 b,d,5 c,d,11 c,e,9 d,e,10
+// s a
+
+// Output
+// { distance: Map { 'a' => 0, 'b' => 6, 'c' => 7, 'd' => 11, 'e' => 16 },
+//     predecessor: Map { 'a' => null, 'b' => 'a', 'c' => 'a', 'd' => 'b', 'e' => 'c' } }
+
+
+// Input
+// V a b c d e
+// E a,b,6 a,c,7 b,c,8 b,d,5 c,d,11 c,e,9 d,e,-10
+// s a
+
+// Output
+// Graph contains a negative-weight cycle
