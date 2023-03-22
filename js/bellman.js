@@ -81,10 +81,6 @@ rl.on('line', (line) => {
             graph.addEdge(edge[0], edge[1], parseInt(edge[2]));
         }
     }
-    // print the graph
-    else if(input[0] == 'p'){
-        console.log(graph.print());
-    }
     else if(input[0] == 's'){
         let result = graph.bellmanFord(input[1]);
         console.log(result);
@@ -113,5 +109,5 @@ rl.on('line', (line) => {
 
 // From ideone.com:
 // You can find this code from the below link:
-// Link:
+// Link: https://ideone.com/J1mbdl
 // After that, choose Node.js and enter the stdin and click on run button.

@@ -1,56 +1,38 @@
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
 
-function Bellman_Ford(graph, V, E, src)
-{
-    var dis = Array(V).fill(1e9+7);
-    dis[src] = 0;
 
-    for(var i=0; i<V-1; i++)
+
+
+
+let graph = new Graph();
+// node from readline
+rl.on('line', (line) => {
+    let input = line.split(' ');
+    if(input[0] == 'V')
     {
-        for(var j=0; j<E; j++)
-        {
-            var u = graph[j][0];
-            var v = graph[j][1];
-            var w = graph[j][2];
-
-            if(dis[u] + w < dis[v])
-                dis[v] = dis[u] + w;
+        for(let i = 1; i < input.length; i++){
+            graph.addNode(input[i]);
         }
     }
-
-    for(var i=0; i<E; i++)
-    {
-        var u = graph[i][0];
-        var v = graph[i][1];
-        var w = graph[i][2];
-
-        if(dis[u] + w < dis[v])
-        {
-            console.log("Negative cycle detected.");
-            return;
+    else if(input[0] == 'E'){
+        let input = line.split(' ');
+        for(let i = 1; i < input.length; i++){
+            let edge = input[i].split(',');
+            graph.addEdge(edge[0], edge[1], parseInt(edge[2]));
         }
     }
+    // print the graph
+    else if(input[0] == 'p'){
+        console.log(graph.print());
+    }
+    else if(input[0] == 's'){
+        let result = graph.bellmanFord(input[1]);
+        console.log(result);
+    }
 
-    console.log(dis);
-}
-
-function addEdge(u, v, w)
-{
-    graph.push([u, v, w]);
-}
-
-var V = 5;
-var E = 8;
-
-var graph = [];
-addEdge(0, 1, -1);
-addEdge(0, 2, 4);
-addEdge(1, 2, 3);
-addEdge(1, 3, 2);
-addEdge(1, 4, 2);
-addEdge(3, 2, 5);
-addEdge(3, 1, 1);
-addEdge(4, 3, -3);
-
-Bellman_Ford(graph, V, E, 0);
-
+});
