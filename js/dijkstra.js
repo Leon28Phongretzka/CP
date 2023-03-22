@@ -41,6 +41,26 @@ class Graph{
         // Set distance of source to 0
         distance.set(source, 0);
         // Relax all edges |V|-1 times
+        for(let node of this.nodes){
+            for(let neighbor of this.edges.get(node).keys()){
+                let alt = distance.get(node) + this.edges.get(node).get(neighbor);
+                if(alt < distance.get(neighbor)){
+                    distance.set(neighbor, alt);
+                    predecessor.set(neighbor, node);
+                }
+            }
+        }
+        // Check for negative-weight cycles
+        for(let node of this.nodes){
+            for(let neighbor of this.edges.get(node).keys()){
+                let alt = distance.get(node) + this.edges.get(node).get(neighbor);
+                if(alt < distance.get(neighbor)){
+                    console.log("Graph contains a negative-weight cycle");
+                    return;
+                }
+            }
+        }
+        return {distance, predecessor};
     }
 
 }
@@ -70,7 +90,7 @@ rl.on('line', (line) => {
         console.log(graph.print());
     }
     else if(input[0] == 's'){
-        let result = graph.bellmanFord(input[1]);
+        let result = graph.dijkstra(input[1]);
         console.log(result);
     }
 
