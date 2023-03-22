@@ -29,7 +29,7 @@ class Graph{
             console.log(node + " => " + result);
         }
     }
-    // Bellman-Ford algorithm to find minimum value path from source to all other nodes
+    // Dijkstra's algorithm to find minimum value path from source to all other nodes
     dijkstra(source){
         let distance = new Map();
         let predecessor = new Map();
