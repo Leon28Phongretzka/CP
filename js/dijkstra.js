@@ -4,7 +4,46 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+class Graph{
+    constructor() {
+        this.nodes = new Set();
+        this.edges = new Map();
+    }
 
+    addNode(node) {
+        this.nodes.add(node);
+        this.edges.set(node, new Map());
+    }
+
+    addEdge(node1, node2, weight) {
+        this.edges.get(node1).set(node2, weight);
+        this.edges.get(node2).set(node1, weight);
+    }
+    print() {
+        for (let node of this.nodes) {
+            let neighbors = this.edges.get(node);
+            let result = "";
+            for (let neighbor of neighbors) {
+                result += neighbor[0] + " " + neighbor[1] + " ";
+            }
+            console.log(node + " => " + result);
+        }
+    }
+    // Bellman-Ford algorithm to find minimum value path from source to all other nodes
+    dijkstra(source){
+        let distance = new Map();
+        let predecessor = new Map();
+        // Set all distances to infinity and all predecessors to null
+        for(let node of this.nodes){
+            distance.set(node, Infinity);
+            predecessor.set(node, null);
+        }
+        // Set distance of source to 0
+        distance.set(source, 0);
+        // Relax all edges |V|-1 times
+    }
+
+}
 
 
 
