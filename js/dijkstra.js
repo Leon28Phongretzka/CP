@@ -1,5 +1,4 @@
-// Bellman Ford's algorithm for finding the shortest path
-// between two nodes in a graph.
+
 
 function Bellman_Ford(graph, V, E, src)
 {
