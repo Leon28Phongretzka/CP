@@ -1,3 +1,5 @@
+// Dijkstra's ideone: https://ideone.com/hNMCQr
+
 const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,

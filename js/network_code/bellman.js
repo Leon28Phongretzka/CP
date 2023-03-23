@@ -1,3 +1,5 @@
+// Bellman-Ford's ideone: https://ideone.com/MflKuO
+
 const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
