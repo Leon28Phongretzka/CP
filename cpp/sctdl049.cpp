@@ -18,33 +18,33 @@ typedef long long ll;
 #define Len 1005
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
+const int fraud = 123456789;
 
-
-// use DP to find the longest path from (0,0) to column n
-int matran001(vector<vector<int>> a, int n, int m)
+int binarySearch(vector<int> &a, int l, int r, int x)
 {
-    int res = 0;
-    vector<vector<int>> dp(Len, vector<int>(Len, 0));
-    for(int i=0; i<n; i++) dp[i][0] = a[i][0];
-    for(int i=1; i<n; i++)
+    if (r >= l)
     {
-        for(int j=0; j<m; j++)
-        {
-            dp[i][j]=min(dp[i-1][j-1],min(dp[i-1][j],dp[i-1][j+1]))+a[i][j];
-        }
+        int mid = l + (r - l) / 2;
+        if (a[mid] == x)
+            return mid+1;
+        if (a[mid] > x)
+            return binarySearch(a, l, mid - 1, x);
+        return binarySearch(a, mid + 1, r, x);
     }
-    for(int i=1; i<n; i++) res = min(res, dp[i][m-1]);
-    return res;
+    return -1;
 }
 
 void solve()
 {
-    int n, m; cin >> n >> m;
-    vector<vector<int>> a(Len, vector<int>(Len));
-    for(int i=0; i<n; i++) for(int j=0; j<m; j++) cin >> a[i][j];
-    vector<vector<int>> b(m, vector<int>(n));
-    for(int i=0; i<n; i++) for(int j=0; j<m; j++) b[j][i] = a[i][j];
-    cout << matran001(b,n,m) << endl;
+    ll n,k; cin >> n >> k;
+    vector<int> a(n);
+    for(int i=0; i<n; i++) cin >> a[i];
+    if(binarySearch(a, 0, n-1, k) == -1)
+    {
+        cout << "NO" << endl;
+        return;
+    }
+    cout << binarySearch(a, 0, n-1, k) << endl;
 
 }
 
