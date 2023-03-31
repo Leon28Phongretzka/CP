@@ -18,39 +18,35 @@ typedef long double ld;
 const double pi=3.14159265358979323846;
 const int MOD = 1000000007;
 
-void bucket(vector<float> &arr, int n)
+void bucket(float arr[], int n)
 {
-      
-    // 1) Create n empty buckets
     vector<float> b[n];
-  
-    // 2) Put array elements 
-    // in different buckets
     for (int i = 0; i < n; i++) {
-        int bi = n * arr[i]; // Index in bucket
+        int bi = n * arr[i];
         b[bi].push_back(arr[i]);
     }
   
-    // 3) Sort individual buckets
     for (int i = 0; i < n; i++)
+    {
         sort(b[i].begin(), b[i].end());
-  
-    // 4) Concatenate all buckets into arr[]
+    }
+
     int index = 0;
     for (int i = 0; i < n; i++)
+    {
         for (int j = 0; j < b[i].size(); j++)
             arr[index++] = b[i][j];
+    }
 }
 
 void solve()
 {
     int n; cin >> n;
-    vector<float> a(n);
-    for(int i=0; i<n; i++) cin >> a[i];
+    float a[] = {0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434};
+    n = sizeof(a)/sizeof(a[0]);
     // for(int i=0; i<n; i++) cout << a[i] << " "; cout << endl;
     bucket(a, n);
     for(int i=0; i<n; i++) cout << a[i] << " "; cout << endl;
-
 }
 
 int main()

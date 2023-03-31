@@ -23,6 +23,7 @@ function bucketSort(arr,n)
         {
             arr[index++] = buckets[i][j];
         }
+        
     }
 
     return arr;
@@ -32,7 +33,6 @@ function bucketSort(arr,n)
 let arr = new Array(10);
 for(let i=0; i<10; i++)
 {
-    // arr[i] from keyboard
     arr[i] = Math.random();
 }
 
