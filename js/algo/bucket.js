@@ -3,12 +3,14 @@ function bucketSort(arr,n)
     if(n<=0) return;
     let buckets = new Array(n);
     for(let i = 0; i<n; i++) buckets[i] = [];
+
     for(let i=0; i<n; i++)
     {
-        let index = arr[i] * n;
+        let index = arr[i] * n / 100;
         let flr = Math.floor(index);
         buckets[flr].push(arr[i]);
     }
+    
 
     for(let i=0; i<n; i++)
     {
@@ -30,13 +32,19 @@ function bucketSort(arr,n)
 }
 
 // implementation
-let arr = new Array(10);
-for(let i=0; i<10; i++)
-{
-    arr[i] = Math.random();
-}
+
+// let arr = new Array(10);
+// for(let i=0; i<10; i++)
+// {
+//     // arr[i] from keyboard
+//     // arr[i] = Math.random()*100;
+//     arr[i] = Math.floor(arr[i]);
+// }
+
+
+let arr = [11,9,21,8,17,13,19,1,24,12];
+
 
 console.log(arr);
-
 let n = arr.length;
 console.log(bucketSort(arr,n));

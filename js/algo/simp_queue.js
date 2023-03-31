@@ -71,13 +71,14 @@ queue.enqueue(22);
 queue.enqueue(24);
 queue.enqueue(25);
 
+console.log("Queue now has: " + queue.count());
 console.log(queue.isFull());
 console.log(queue.printQueue());
 
-console.log(queue.dequeue());
-console.log(queue.dequeue());
+console.log(queue.dequeue() + " dequeued out of queue");
+console.log(queue.dequeue() + " dequeued out of queue");
 
 console.log(queue.isFull());
 console.log(queue.printQueue());
 
-
+console.log(queue.count());

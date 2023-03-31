@@ -21,10 +21,10 @@ const int MOD = 1000000007;
 class Queue
 {
     int *arr;
-    int capacity;
+    int capacity;  
     int front;
     int rear;
-    int count;
+    int count; 
     public:
         Queue(int size);
         ~Queue();
@@ -33,10 +33,13 @@ class Queue
         void enqueue(int x);
         int peek();
         int size();
+        int front_q();
+        int rear_q();
         bool isEmpty();
         bool isFull();
         void change(int idx, int element);
         void display();
+        void sum();
 };
 
 Queue::Queue(int size = Len)
@@ -114,6 +117,16 @@ void Queue::change(int idx, int element)
     }
 }
 
+int Queue::front_q()
+{
+    return arr[0];
+}
+
+int Queue::rear_q()
+{
+    return arr[count-1];
+}
+
 void Queue::display()
 {
     for (int i = 0; i < count; i++) {
@@ -122,16 +135,28 @@ void Queue::display()
     }
 }
 
+void Queue::sum()
+{
+    int sum = 0;
+    for (int i = 0; i < count; i++) {
+        int index = (front + i) % capacity;
+        sum += arr[index];
+    }
+    cout << sum << endl;
+}
+
 int main()
 {
     class Queue s(5);
     s.enqueue(21);
     s.enqueue(22);
-    s.enqueue(23);
     s.enqueue(24);
     s.enqueue(25);
 
     s.display(); cout << endl;
+
+    cout << s.front_q() << endl;
+    cout << s.rear_q() << endl;
 
     if(s.isFull())
         cout << "Queue is full" << endl;
@@ -141,8 +166,9 @@ int main()
     cout << s.dequeue() << " dequeued from queue " << endl;
     cout << s.dequeue() << " dequeued from queue " << endl;
 
-    s.enqueue(26); cout << endl;
+    s.display(); cout << endl;
 
     s.display();
+    s.sum();
 
 }

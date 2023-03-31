@@ -147,8 +147,8 @@ int main()
     s.push(22);
     s.push(24);
     s.push(25);
-    // cout << s.pos(3) << endl;
     s.display(); cout << endl;
+    cout << s.pos(3) << endl;
     s.displayFirst();
     cout << s.count() << endl;
     s.change(1, 23);

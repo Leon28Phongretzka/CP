@@ -10,8 +10,6 @@ typedef long double ld;
 #define eb emplace_back
 #define ob pop_back
 #define sz(s) ((int)(s.size()))
-#define UM uno\nrdered_map
-#define US uno\nrdered_set
 #define forn(i, n) for (int i = 1; i <= int(n); i++)
 #define fora(i, n) for(auto i:n)
 #define Len 1005

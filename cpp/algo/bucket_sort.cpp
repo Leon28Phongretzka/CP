@@ -20,12 +20,14 @@ const int MOD = 1000000007;
 
 void bucket(float arr[], int n)
 {
+    if(n<=0) return;
     vector<float> b[n];
     for (int i = 0; i < n; i++) {
-        int bi = n * arr[i];
-        b[bi].push_back(arr[i]);
+        int bi = n * arr[i]/100;
+        int flr = floor(bi);
+        b[flr].push_back(arr[i]);
     }
-  
+    
     for (int i = 0; i < n; i++)
     {
         sort(b[i].begin(), b[i].end());
@@ -35,18 +37,27 @@ void bucket(float arr[], int n)
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < b[i].size(); j++)
+        {
             arr[index++] = b[i][j];
+        }
     }
+    
+    for(int i=0; i<n; i++) cout << arr[i] << " "; cout << endl;
+
 }
 
 void solve()
 {
-    int n; cin >> n;
-    float a[] = {0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434};
-    n = sizeof(a)/sizeof(a[0]);
-    // for(int i=0; i<n; i++) cout << a[i] << " "; cout << endl;
+    float a[] = { 11,9,21,8,17,13,19,1,24,12 };  
+    int min1 = *min_element(a,a+10);
+    int max1 = *max_element(a,a+10);
+    cout << min1 << " " << max1 << endl;
+    int n = sizeof(a)/sizeof(a[0]); cout << n << endl;
+    int range = ( max1- min1 ) / n; // cout << range << endl;
     bucket(a, n);
-    for(int i=0; i<n; i++) cout << a[i] << " "; cout << endl;
+
+
+
 }
 
 int main()

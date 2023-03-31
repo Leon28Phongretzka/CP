@@ -18,7 +18,7 @@ typedef long double ld;
 const double pi=3.14159265358979323846;
 const int MOD = 1000000007;
 
-void bubble(vector<int> &a, int n)
+void bubble(vector<float> &a, int n)
 {
     for(int i=0; i<n-1; i++)
     {
@@ -31,12 +31,13 @@ void bubble(vector<int> &a, int n)
             cout << a[j] << " ";
         cout << endl;
     }
+    cout << endl;
 }
 
 void solve()
 {
     int n; cin >> n;
-    vector<int> a(n);
+    vector<float> a(n);
     for(int i=0; i<n; i++) cin >> a[i];
     bubble(a, n);
 }
