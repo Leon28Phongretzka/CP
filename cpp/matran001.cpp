@@ -15,52 +15,48 @@ typedef long long ll;
 #define forn(i, a, b) for (ll i = a; i < b; i++)
 #define forr(i, a, b) for (ll i = a; i >= b; i--)
 #define fora(i, n) for (auto i : n)
-#define Len 100005
+#define Len 1005
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 
 
 // use DP to find the longest path from (0,0) to column n
-void matran001(vector<vector<int>> a, int n, int m)
+int matran001(vector<vector<int>> a, int n, int m)
 {
     int res = 0;
-    vector<vector<int>> dp(n, vector<int>(m, 0));
+    vector<vector<int>> dp(Len, vector<int>(Len, 0));
     for(int i=0; i<n; i++) dp[i][0] = a[i][0];
-    for(int j=1; j<m; j++)
-    {
-        for(int i=0; i<n; i++)
-        {
-            if(i==0) dp[i][j] = max(dp[i][j-1], dp[i+1][j-1]) + a[i][j];
-            else if(i==n-1) dp[i][j] = max(dp[i][j-1], dp[i-1][j-1]) + a[i][j];
-            else dp[i][j] = max(dp[i][j-1], max(dp[i-1][j-1], dp[i+1][j-1])) + a[i][j];
-        }
-    }
-    for(int i=0; i<n; i++)
+    for(int i=1; i<n; i++)
     {
         for(int j=0; j<m; j++)
         {
-            cout << dp[i][j] << " ";
+            dp[i][j]=max(dp[i-1][j-1],max(dp[i-1][j],dp[i-1][j+1]))+a[i][j];
         }
-        cout << endl;
     }
-    for(int i=0; i<n; i++) res = max(res, dp[i][m-1]);
-    cout << res << endl;
+    for(int i=1; i<n; i++) res = max(res, dp[i][m-1]);
+    return res;
 }
 
 void solve()
 {
     int n, m; cin >> n >> m;
-    vector<vector<int>> a(n, vector<int>(m));
+    vector<vector<int>> a(Len, vector<int>(Len));
     for(int i=0; i<n; i++) for(int j=0; j<m; j++) cin >> a[i][j];
-    // for(int i=0; i<n; i++) {
-    //     for(int j=0; j<m; j++) 
-    //     {
-    //         cout << a[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
-    matran001(a, n, m);
-    int res = 0;  
+    vector<vector<int>> b(m, vector<int>(n));
+    for(int i=0; i<n; i++) for(int j=0; j<m; j++) b[j][i] = a[i][j];
+    // cout << matran001(b,n,m) << endl;
+    int res = 0;
+    vector<vector<int>> dp(Len, vector<int>(Len, 0));
+    for(int i=0; i<n; i++) dp[i][0] = b[i][0];
+    for(int i=1; i<n; i++)
+    {
+        for(int j=0; j<m; j++)
+        {
+            dp[i][j]=max(dp[i-1][j-1],max(dp[i-1][j],dp[i-1][j+1]))+b[i][j];
+        }
+    }
+    for(int i=1; i<n; i++) res = max(res, dp[i][m-1]);
+    cout << res << endl;
 
 }
 
