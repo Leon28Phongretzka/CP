@@ -47,6 +47,7 @@ class 2_Stack
 int main()
 {
     class 2_Stack s;
+    // class 2_stack s2;
     s.push(21);
     s.push(22);
     s.push(24);

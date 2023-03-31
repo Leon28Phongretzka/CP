@@ -30,6 +30,19 @@ for(let i=0; i<10; i++)
     arr[i] = Math.floor(arr[i]);
 };
 
+// var lines = [];
+// require("readline").createInterface({
+//   input: process.stdin
+// }).on("line", (line) => lines.push(line));
+// process.stdin.on("end", () => {
+//   main(lines);
+// });
+// var main = (lines2) => {
+//   const x = lines2[1].split(" ").map(Number);
+//   for (const xi of x)
+//     output(solve(xi));
+// };
+
 console.log(arr);
 
 let n = arr.length;

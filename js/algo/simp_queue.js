@@ -29,6 +29,14 @@ class Queue
         }
         return this.item.shift();
     }
+    peek(i)
+    {
+        if(this.item.length == 0)
+        {
+            return "Underflow";
+        }
+        return this.item[i-1];
+    }
     isFull()
     {
         return this.item.length == this.size;
@@ -59,9 +67,9 @@ queue.size(5);
 
 queue.enqueue(21);
 queue.enqueue(22);
-queue.enqueue(23);
-queue.enqueue(23);
-queue.enqueue(23);
+// queue.enqueue(23);
+queue.enqueue(24);
+queue.enqueue(25);
 
 console.log(queue.isFull());
 console.log(queue.printQueue());

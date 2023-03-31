@@ -27,11 +27,13 @@ class Stack
         bool push(ll x);
         ll pop();
         ll peek();
+        ll pos(int idx);
         bool isEmpty();
         bool isFull();
         ll count();
         void change(int idx, ll element);
         void display();
+        void displayFirst();
 };
   
 bool Stack::push(ll x)
@@ -69,7 +71,20 @@ ll Stack::peek()
         return x;
     }
 }
-  
+
+ll Stack::pos(int idx)
+{
+    if (top < 0) {
+        cout << "Stack is Empty";
+        return 0;
+    }
+    else
+    {
+        ll x = a[idx-1];
+        return x;
+    }
+}
+
 bool Stack::isEmpty()
 {
     return (top < 0);
@@ -97,6 +112,18 @@ void Stack::change(int idx, ll element)
     }
 }
 
+void Stack::displayFirst()
+{
+    if (top < 0)
+    {
+        cout << "Stack is Empty";
+    }
+    else
+    {
+        cout << a[0] << endl;
+    }
+}
+
 void Stack::display()
 {
     if (top < 0)
@@ -120,7 +147,9 @@ int main()
     s.push(22);
     s.push(24);
     s.push(25);
+    // cout << s.pos(3) << endl;
     s.display(); cout << endl;
+    s.displayFirst();
     cout << s.count() << endl;
     s.change(1, 23);
     cout << s.pop() << endl;

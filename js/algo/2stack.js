@@ -58,12 +58,12 @@ class twoStack
 
     change1(element, i)
     {
-        this.stack1[i] = element;
+        this.stack1[i-1] = element;
     }
 
     change2(element, i)
     {
-        this.stack2[i] = element;
+        this.stack2[i-1] = element;
     }
 
     printStack1()

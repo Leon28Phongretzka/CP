@@ -18,10 +18,23 @@ class Stack
         }
         return this.item.pop();
     }
-    // peek at i position
-    peek()
+    // top element from stack
+    top()
     {
+        if(this.item.length == 0)
+        {
+            return "Underflow";
+        }
         return this.item[this.item.length - 1];
+    }
+    // peek at i position
+    peek(i)
+    {
+        if(this.item.length == 0)
+        {
+            return "Underflow";
+        }
+        return this.item[i-1];
     }
     // check stack is empty
     isEmpty()
@@ -58,7 +71,7 @@ class Stack
 let stack = new Stack();
 stack.push(21);
 stack.push(22);
-stack.push(23);
+// stack.push(23);
 stack.push(24);
 stack.push(25);
 
@@ -67,7 +80,9 @@ console.log(stack.printStack());
 console.log(stack.pop());
 console.log(stack.pop());
 
+console.log(stack.top());
+
 console.log(stack.printStack());
-console.log(stack.peek());
+console.log(stack.peek(2));
 console.log(stack.isEmpty());
 
