@@ -48,30 +48,56 @@ typedef vector<string> vs;
 #define MOD 1000000007
 
 ll n, k;
-ll C(ll n, ll k)
+// fast fibonacci number
+ll pow(ll a, ll b)
 {
-    vector<vector<ll>> C(Len, vector<ll>(Len, 0));
-    C[0][0] = 1;
-    for (ll i = 1; i < Len; i++)
+    ll res = 1;
+    while (b)
     {
-        C[i][0] = 1;
-        for (ll j = 1; j < Len; j++)
-        {
-            if (j == 0 || j == i)
-                C[i][j] = 1;
+        if (b & 1)
+            res = (res * a) % MOD;
+        a = (a * a) % MOD;
+        b >>= 1;
+    }
+    return res;
+}
 
-            else
-                C[i][j] = (C[i - 1][j - 1] % MOD + C[i - 1][j] % MOD) % MOD;
+// fast fibonacci number
+vector<int> fast_fib(int n) {
+    if (n == 0) {
+        return {0, 1};
+    } else {
+        vector<int> half = fast_fib(n / 2);
+        int a = half[0];
+        int b = half[1];
+        int c = a * (2 * b - a);
+        int d = a * a + b * b;
+        if (n % 2 == 0) {
+            return {c, d};
+        } else {
+            return {d, c + d};
         }
     }
+}
 
-    return C[n][k];
+void fib(ll n)
+{
+    ll a = 0, b = 1, c = 1;
+    for(ll i = 3; i <= n; i++)
+    {
+        a = b;
+        b = c;
+        c = (a + b) % MOD;
+    }
+    cout << c << endl;
 }
 
 void solve()
 {
-    cin >> n >> k;
-    cout << C(n, k) << endl;
+    cin >> n;
+    ll res = 0;
+    cout << fast_fib(n)[0] << endl;
+    
 }
 
 int main()

@@ -1,37 +1,86 @@
 #include <bits/stdc++.h>
-#define ll long long
-#define fi first
-#define se second
-#define pb push_back
-#define all(v) v.begin(), v.end()
-#define f(i, a, b) for (int i = a; i <= b; ++i)
-#define fn(i, a, b) for (int i = a; i >= b; --i)
-#define faster() ios_base::sync_with_stdio(false), cin.tie(0), cout.tie(0);
-const int MOD = 1e9 + 7;
-
 using namespace std;
-int a[1005][1005];
+#define FAST_IO                   \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);                  \
+    cerr.tie(0)
+typedef long long ll;
+typedef unsigned long long ul;
+typedef long double ld;
+typedef map<int, int> mii;
+typedef map<ll, ll> mll;
+typedef pair<ll, ll> pll;
+typedef pair<int, int> pii;
+typedef pair<double, double> pdd;
+typedef pair<bool, ll> pbl;
+typedef pair<ul, int> pui;
+typedef vector<pii> vpii;
+typedef vector<vpii> vvpii;
+typedef vector<int> vi;
+typedef vector<int>::iterator ip;
+typedef vector<vi> vvi;
+typedef vector<vvi> vvvi;
+typedef vector<bool> vb;
+typedef vector<vb> vvb;
+typedef vector<pll> vpll;
+typedef vector<ll> vl;
+typedef vector<vl> vvl;
+typedef vector<pbl> vpbl;
+typedef vector<double> vd;
+typedef vector<vd> vvd;
+typedef vector<pdd> vpdd;
+typedef vector<string> vs;
+typedef vector<pui> vpui;
+typedef vector<ul> vu;
+typedef vector<string> vs;
+#define mp make_pair
+#define gl getline
+#define pb push_back
+#define eb emplace_back
+#define ob pop_back
+#define sz(s) ((int)(s.size()))
+#define UM uno\nrdered_map
+#define US uno\nrdered_set
+#define forn(i, n) for (int i = 1; i <= ll(n); i++)
+#define fora(i, n) for (auto i : n)
+#define Len 1005
+#define MOD 1000000007
+
+ll n, k;
+ll C(ll n, ll k)
+{
+    vector<vector<ll>> C(Len, vector<ll>(Len, 0));
+    C[0][0] = 1;
+    for (ll i = 1; i < Len; i++)
+    {
+        C[i][0] = 1;
+        for (ll j = 1; j < Len; j++)
+        {
+            if (j == 0 || j == i)
+                C[i][j] = 1;
+
+            else
+                C[i][j] = (C[i - 1][j - 1] % MOD + C[i - 1][j] % MOD) % MOD;
+        }
+    }
+
+    return C[n][k];
+}
+
+void solve()
+{
+    cin >> n >> k;
+    cout << C(n, k) << endl;
+}
+
 int main()
 {
-    faster();
-    // freopen("input.txt","r", stdin);
-    // freopen("output.txt","w", stdout);
-
-    a[0][0] = 1;
-    for (int i = 1; i < 1005; ++i)
-    {
-        a[i][0] = 1;
-        for (int j = 1; j < 1005; ++j)
-            a[i][j] = (a[i - 1][j - 1] % MOD + a[i - 1][j] % MOD) % MOD;
-    }
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        int n, k;
-        cin >> n >> k;
-        cout << a[n][k];
-        cout << '\n';
-    }
-    return 0;
+    FAST_IO;
+    // freopen("time.in", "r", stdin); freopen("time.out", "w", stdout);
+    int tt;
+    cin >> tt;
+    while (tt--)
+        solve();
+    // solve();
 }
