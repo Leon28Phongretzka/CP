@@ -26,148 +26,33 @@ int getPriority(char c)
         return 2;
     return 0;
 }
-
-string preToin(string prefix)
+string postTopre(string s)
 {
-    stack<string> s;
-    int length = prefix.size();
-    for (int i = length - 1; i >= 0; i--)
+    stack<string> st;
+    for (int i = 0; i < s.length(); i++)
     {
-        if (prefix[i] == '+' || prefix[i] == '-' || prefix[i] == '*' || prefix[i] == '/')
+        if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/')
         {
-            string op1 = s.top(); s.pop();
-            string op2 = s.top(); s.pop();
-            string temp = "(" + op1 + prefix[i] + op2 + ")";
-            s.push(temp);
+            string op1 = st.top(); st.pop();
+            string op2 = st.top(); st.pop();
+            string temp = s[i] + op2 + op1;
+            st.push(temp);
         }
         else
         {
-            s.push(string(1, prefix[i]));
+            st.push(string(1, s[i]));
         }
     }
-    return s.top();
+    return st.top();
 }
-
-string inTopost(string infix)
-{
-    stack<char> s;
-    string postfix = "";
-    int length = infix.length();
-
-    for(int i=0; i<length; i++)
-    {
-        char c = infix[i];
-        if(c == '(')
-        {
-            s.push(c);
-        }
-        else if(c == ')')
-        {
-            while(!s.empty() && s.top() != '(')
-            {
-                postfix += s.top();
-                s.pop();
-            }
-            s.pop();
-        }
-        else if(c == '+' || c == '-' || c == '*' || c == '/')
-        {
-            while(!s.empty() && getPriority(c) <= getPriority(s.top()))
-            {
-                postfix += s.top();
-                s.pop();
-            }
-            s.push(c);
-        }
-        else
-        {
-            postfix += c;
-        }
-    }
-    while(!s.empty())
-    {
-        postfix += s.top();
-        s.pop();
-    }
-    return postfix;
-}
-
-string postToin(string postfix)
-{
-    stack<string> s;
-    int length = postfix.size();
-    for (int i = 0; i < length; i++)
-    {
-        if (postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/')
-        {
-            string op1 = s.top(); s.pop();
-            string op2 = s.top(); s.pop();
-            string temp = "(" + op1 + postfix[i] + op2 + ")";
-            s.push(temp);
-        }
-        else
-        {
-            s.push(string(1, postfix[i]));
-        }
-    }
-    return s.top();
-}
-
-string inTopre(string infix)
-{
-    stack<char> s;
-    string prefix = "";
-    int length = infix.length();
-    for(int i=length-1; i>=0; i--)
-    {
-        char c = infix[i];
-        if(c == ')')
-        {
-            s.push(c);
-        }
-        else if(c == '(')
-        {
-            while(!s.empty() && s.top() != ')')
-            {
-                prefix += s.top();
-                s.pop();
-            }
-            s.pop();
-        }
-        else if(c == '+' || c == '-' || c == '*' || c == '/')
-        {
-            while(!s.empty() && getPriority(c) < getPriority(s.top()))
-            {
-                prefix += s.top();
-                s.pop();
-            }
-            s.push(c);
-        }
-        else
-        {
-            prefix += c;
-        }
-    }
-    while(!s.empty())
-    {
-        prefix += s.top();
-        s.pop();
-    }
-    reverse(prefix.begin(), prefix.end());
-    return prefix;
-}
-
-
 
 void solve()
 {
     string s; cin >> s;
     // cin.ignore();
     int n = sz(s);
-    string res = postToin(s);
-    // cout << res << endl;
-    string res2 = inTopre(res);
-    cout << res2 << endl; 
+    string res = postTopre(s);
+    cout << res << endl;  
 }
 
 int main()

@@ -24,18 +24,22 @@ void solve()
     vector<int> a(n);
     for(int i=0; i<n; i++) cin >> a[i]; 
     // for(int i=0; i<n; i++) cout << a[i] << " "; cout << endl;
-    set<int> s;
-    for(int i=0; i<n-1; i++)
-    {
-        if(a[i]>a[i+1]) a[i+1] = a[i];
-    }
+    vector<ll> dp(n+1, 0);
+    ll ans = 0;
     for(int i=0; i<n; i++)
     {
-        cout << a[i] << " ";
-        s.insert(a[i]);
+        for(int j=0; j<i; j++)
+        {
+            if(a[i] > a[j])
+            {
+                dp[i] = max(dp[i], dp[j] + 1);
+            }
+        }
+        ans = max(ans, dp[i]);
     }
-    cout << endl;
-    cout << sz(s) << endl;
+    cout << ans+1 << endl;
+    
+
 }
 
 int main()

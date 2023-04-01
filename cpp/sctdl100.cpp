@@ -15,36 +15,42 @@ typedef long long ll;
 #define forn(i, a, b) for (ll i = a; i < b; i++)
 #define forr(i, a, b) for (ll i = a; i >= b; i--)
 #define fora(i, n) for (auto i : n)
-#define Len 1005
+#define Len 1001
+#define MaxDP 100006
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
-vector<vector<int>> dp(Len, vector<int>(Len));
+vector<vector<ll>> dp(Len, vector<ll>(Len));
+vector<ll> dp1(MaxDP, 0);
+
 void solve()
 {
-    int n, m; cin >> n >> m;
-    vector<vector<int>> a(Len, vector<int>(Len));
-    for(int i=1; i<=n; i++) for(int j=1; j<=m; j++) cin >> a[i][j];
-    for(int i=1; i<=m; i++) dp[1][i] = a[1][i];
-    for(int i=1; i<=n; i++)
+    int n; cin >> n;
+    vector<ll> a(n);
+    for(int i=0; i<n; i++) cin >> a[i];
+
+    // ll l = 0, r = 0;
+    ll max_size = 0;
+    ll max_val = *max_element(a.begin(), a.end()); 
+    // cout << max_val;
+    ll min_val = 1e9;
+
+    for(int i=1; i<=max_val; i++)
     {
-        dp[i][0] = -1;
-        dp[i][m+1] = -1;
-    }
-    int ans = 0;
-    for(int i=2; i<=n; i++) 
-    {
-        for(int j=1; j<=m; j++) 
+        ll size = 0;
+        for(int j=0; j<n; j++)
         {
-            dp[i][j] = max(dp[i-1][j], max(dp[i-1][j-1], dp[i-1][j+1])) + a[i][j];
+            if(a[j] >= i)
+            {
+                size++;
+            }
+            else
+            {
+                size = 0;
+            }
+            max_size = max(max_size, size*i);
         }
     }
-    // for(int i=0; i<=n; i++)
-    // {
-    //     for(int j=0; j<=m; j++) cout << dp[i][j] << " ";
-    //     cout << endl;
-    // }
-    for(int i=1; i<=m; i++) ans = max(ans, dp[n][i]);
-    cout << ans << endl;
+    cout << max_size << endl;
 }
 
 int main()

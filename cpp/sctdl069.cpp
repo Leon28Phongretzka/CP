@@ -15,35 +15,38 @@ typedef long long ll;
 #define forn(i, a, b) for (ll i = a; i < b; i++)
 #define forr(i, a, b) for (ll i = a; i >= b; i--)
 #define fora(i, n) for (auto i : n)
-#define Len 1005
+#define Len 1001
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
-vector<vector<int>> dp(Len, vector<int>(Len));
+vector<vector<ll>> dp(Len, vector<ll>(Len));
 void solve()
 {
     int n, m; cin >> n >> m;
-    vector<vector<int>> a(Len, vector<int>(Len));
-    for(int i=1; i<=n; i++) for(int j=1; j<=m; j++) cin >> a[i][j];
-    for(int i=1; i<=m; i++) dp[1][i] = a[1][i];
-    for(int i=1; i<=n; i++)
+    vector<vector<ll>> a(Len, vector<ll>(Len));
+    for(ll i=0; i<n; i++) for(ll j=0; j<m; j++) cin >> a[i][j];
+    
+    dp[0][0] = a[0][0];
+    
+    for(ll i=1; i<=n; i++) dp[i][0] = dp[i-1][0] + a[i][0];
+    for(ll i=1; i<=m; i++) dp[0][i] = dp[0][i-1] + a[0][i];
+
+    ll ans = 0;
+
+    for(ll i=1; i<n; i++) 
     {
-        dp[i][0] = -1;
-        dp[i][m+1] = -1;
-    }
-    int ans = 0;
-    for(int i=2; i<=n; i++) 
-    {
-        for(int j=1; j<=m; j++) 
+        for(ll j=1; j<m; j++) 
         {
-            dp[i][j] = max(dp[i-1][j], max(dp[i-1][j-1], dp[i-1][j+1])) + a[i][j];
+            dp[i][j] = min(dp[i-1][j], min(dp[i-1][j-1], dp[i][j-1])) + a[i][j];
         }
     }
-    // for(int i=0; i<=n; i++)
+
+    // for(ll i=0; i<n; i++)
     // {
-    //     for(int j=0; j<=m; j++) cout << dp[i][j] << " ";
+    //     for(ll j=0; j<m; j++) cout << dp[i][j] << " ";
     //     cout << endl;
     // }
-    for(int i=1; i<=m; i++) ans = max(ans, dp[n][i]);
+
+    ans = dp[n-1][m-1];
     cout << ans << endl;
 }
 
