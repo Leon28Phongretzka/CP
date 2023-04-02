@@ -19,41 +19,37 @@ typedef long long ll;
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 
+ll reacfacct(ll start, ll n)
+{
+    ll i;
+    if(n<=16)
+    {
+        ll r = start;
+        for( i = start + 1; i < start + n; i++)
+            r *= i;
+        return r;
+    }
+    i = n / 2;
+    return reacfacct(start, i) * reacfacct(start + i, n - i);
+}
+
+ll gt(ll n)
+{
+    return reacfacct(1, n);
+}
+
+ll C(ll k, ll n)
+{
+    return gt(n) / (gt(k) * gt(n - k));
+}
+
+
 void solve()
 {
-    ll n;
-    cin >> n;
-    vector<double> a(Len);
-    a[0] = 1.0;
-    for (int i = 1; i <= Len; i++)
-    {
-        a[i] = a[i - 1] + log10(i);
-    }
-    for (int i = 1; i <= Len; i++)
-    {
-        a[i] = floor(a[i]);
-    }
+    ll n,k; cin >> n >> k;
+    ll res = 2*C(k, n);
+    cout << res << endl;
 
-    // for(int i=1; i<=Len; i++) cout << a[i] << " "; cout << endl;
-
-    ll res = 0;
-    for (int i = 1; i <= Len; i++)
-    {
-        if (a[i] == n)
-            res++;
-    }
-    if (res == 0)
-    {
-        cout << "NO" << endl;
-        return;
-    }
-    cout << res << " ";
-    for (int i = 1; i <= Len; i++)
-    {
-        if (a[i] == n)
-            cout << i << " ";
-    }
-    cout << endl;
 }
 
 int main()
