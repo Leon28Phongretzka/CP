@@ -24,6 +24,8 @@ int getPriority(char c)
         return 1;
     if (c == '*' || c == '/')
         return 2;
+    if ( c == '^')
+        return 3;
     return 0;
 }
 string postTopre(string s)
@@ -31,7 +33,7 @@ string postTopre(string s)
     stack<string> st;
     for (int i = 0; i < s.length(); i++)
     {
-        if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/')
+        if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/' || s[i] == '^')
         {
             string op1 = st.top(); st.pop();
             string op2 = st.top(); st.pop();
