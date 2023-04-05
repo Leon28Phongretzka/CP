@@ -24,22 +24,8 @@ vector<ll> dp1(MaxDP, 0);
 
 int depth(string s)
 {
-    int n = s.size();
-    if(n==0) return 0;
-    if(s[0] =='l') return 1;
-    int l = 0, r = 0;
-    int i = 1;
-    while(i<n && s[i] == 'l')
-    {
-        l++;
-        i++;
-    }
-    while(i<n && s[i] == 'l')
-    {
-        r++;
-        i++;
-    }
-    return max(findDepth(s.substr(1, left + 1)) + 1, findDepth(s.substr(left + 1, n)) + 1);
+    if(s[i] == 'l'|| i >= n) return 0;
+    i++;
 }
 
 void solve()

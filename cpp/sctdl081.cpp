@@ -22,10 +22,8 @@ const int MOD = 1000000007;
 vector<vector<ll>> dp(Len, vector<ll>(Len));
 vector<ll> dp1(MaxDP, 0);
 
-int depth(string s, int n, int i)
+int depth(string s, int n, int &i)
 {
-    if(n==0) return 0;
-    if(s[0] =='l') return 1;
     if(s[i] == 'l' || i >= n)
         return 0;
     int l = depth(s, n, ++i);
@@ -36,7 +34,8 @@ void solve()
 {
     int n; cin >> n;
     string s; cin >> s;
-    cout << depth(s, n, 0) << endl;
+    int idx = 0;
+    cout << depth(s, n, idx) << endl;
 
 }
 
