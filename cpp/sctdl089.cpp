@@ -20,74 +20,61 @@ typedef long long ll;
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 
-int n,m;
-int dp[MaxDP][MaxDP];
 
-queue<pair<int, int>> q;
+int ans = 0;
+int dx[] = {1, -1, 0, 0};
+int dy[] = {0, 0, 1, -1};
 
-bool isValid(int x, int y) 
+bool check(int dp[][MaxDP],int n,int m)
 {
-    return (x > 0 && x <= n && y > 0 && y <= m);
-}
-
-
-int bfs() {
-    int dx[] = {-1, 0, 1, 0};
-    int dy[] = {0, 1, 0, -1};
-    int days = 0;
-    while (!q.empty()) 
-    {
-        int size = q.size();
-        while (size--) 
-        {
-            pair<int, int> c = q.front();
-            q.pop();
-            for (int i = 0; i < 4; i++) 
-            {
-                int x = c.first + dx[i];
-                int y = c.second + dy[i];
-                if (isValid(x, y) && dp[x][y] == 1) 
-                {
-                    dp[x][y] = 2;
-                    q.push({x, y});
-                }
-            }
-        }
-        days++;
-    }
-
-    // for(int i=0; i<=n; i++)
-    // {
-    //     for(int j=0; j<=m; j++)
-    //     {
-    //         cout<<dp[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
-
     for (int i = 1; i <= n; i++)
-    {
         for (int j = 1; j <= m; j++)
-        {
             if (dp[i][j] == 1)
-                return -1;
-        }
-    }
-    return days - 1;
+                return false;
+    return true;
 }
 
 void solve()
 {
-    cin >> n >> m;
-    for (int i = 1; i <= n; i++)
-        for (int j = 1; j <= m; j++) 
+    int n,m; cin >> n >> m;
+    int dp[MaxDP][MaxDP];
+    int days[MaxDP][MaxDP];
+    memset(dp, 0, sizeof(dp));
+    queue<pair<int, int>> q;
+    for(int i=1; i<=n; i++)
+    {
+        for(int j=1; j<=m; j++)
         {
             cin >> dp[i][j];
-            if (dp[i][j] == 2)
+            if(dp[i][j] == 2)
+            {
                 q.push({i, j});
+            }
         }
+    }
 
-    cout << bfs() << endl;
+    while(!q.empty())
+    {
+        pair<int, int> top = q.front();
+        q.pop();
+        for(int k=0; k<4; k++)
+        {
+            int ii = top.first + dx[k];
+            int jj = top.second + dy[k];
+            if(ii >= 1 && ii <= n && jj >= 1 && jj <= m && dp[ii][jj] == 1)
+            {
+                dp[ii][jj] = 2;
+                q.push({ii, jj});
+                days[ii][jj] = days[top.first][top.second] + 1;
+                ans = max(ans, days[ii][jj]);
+            }
+        }
+    }
+
+    if(check(dp, n, m))
+        cout << ans << endl;
+    else
+        cout << "-1" << endl;
 }
 int main()
 {
