@@ -15,22 +15,28 @@ typedef long long ll;
 #define forn(i, a, b) for (ll i = a; i < b; i++)
 #define forr(i, a, b) for (ll i = a; i >= b; i--)
 #define fora(i, n) for (auto i : n)
-#define Len 1001
+#define Len 100005
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
-vector<vector<ll>> dp(Len, vector<ll>(Len));
+
 void solve()
 {
-    // freopen("main.cpp", "r", stdin); freopen("output.txt", "w", stdout);
-    ll count = 0;
-    char c;
-    while(cin >> c)
+    int m,n; cin >> m >> n;
+    map<int, list<int>> mp;
+    for(int i=0; i<n; i++)
     {
-        if(c != ' '&&c!='\n') count++;
+        int u,v; cin >> u >> v;
+        mp[u].pb(v);
+        mp[v].pb(u);
     }
-    cout << count << endl;
+    for(auto i: mp)
+    {
+        cout << i.first << ": ";
+        fora(j, i.second)
+            cout << j << " ";
+        cout << endl;
+    }
 }
-
 int main()
 {
     FAST_IO;

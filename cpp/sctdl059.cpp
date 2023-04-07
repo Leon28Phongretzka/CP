@@ -18,48 +18,23 @@ typedef long double ld;
 const double pi=3.14159265358979323846;
 const int MOD = 1000000007;
 
-string bin_st(string s)
-{
-    string res = "";
-    int n = s.size();
-    for (int i = 0; i < n; i++)
-    {
-        if(s[i]!='0'&&s[i]!='1')
-        {
-            for(int j = i; j < n; j++)
-            {
-                res += '1';
-            }
-            break;
-        }
-        else
-        {
-            res += s[i];
-        }
-    }
-    return res;
-}
-
-ll bin2dec(string s)
-{
-    ll res = 0;
-    int n = s.size();
-    for (int i = 0; i < n; i++)
-    {
-        res += (s[i] - '0') * pow(2, n - i - 1);
-    }
-    return res;
-}
 
 void solve()
 {
-    string s; cin >> s;
-    // cout << s << endl;
-    s = bin_st(s);
-    // cout << s << endl;
-    ll res = bin2dec(s);
+    ll n; cin >> n;
+    vector<ll> a(n),b(n);
+    for(ll i=0; i<n; i++) cin >> a[i];
+    for(ll i=0; i<n-1; i++) cin >> b[i];
+    ll res = 0;
+    for(ll i=0; i<n; i++)
+    {
+        if(a[i]!=b[i])
+        {
+            res = i+1;
+            break;
+        }
+    }
     cout << res << endl;
-
 }
 
 int main()

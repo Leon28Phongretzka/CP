@@ -15,29 +15,45 @@ typedef long long ll;
 #define forn(i, a, b) for (ll i = a; i < b; i++)
 #define forr(i, a, b) for (ll i = a; i >= b; i--)
 #define fora(i, n) for (auto i : n)
-#define Len 1001
+#define Len 100005
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
-vector<vector<ll>> dp(Len, vector<ll>(Len));
-void solve()
+
+ll s087(ll a, ll b)
 {
-    // freopen("main.cpp", "r", stdin); freopen("output.txt", "w", stdout);
-    ll count = 0;
-    char c;
-    while(cin >> c)
+    ll f[Len] = {};
+    queue<int> q;
+    q.push(a);
+    ll ttt;
+    while(sz(q))
     {
-        if(c != ' '&&c!='\n') count++;
+        ttt = q.front(); q.pop();
+        if(ttt == b) return f[ttt];
+        if((ttt << 1) < (b << 1) and !f[ttt << 1])
+        {
+            f[ttt << 1] = f[ttt] + 1;
+            q.push(ttt << 1);
+        }
+        if(!f[ttt - 1])
+        {
+            f[ttt - 1] = f[ttt] + 1;
+            q.push(ttt - 1);
+        }
     }
-    cout << count << endl;
+    return -1;
 }
 
+void solve()
+{
+    ll a,b; cin >> a >> b;
+    if(a>b) cout << a-b << endl;
+    else cout << s087(a,b) << endl;
+
+}
 int main()
 {
     FAST_IO;
-    int tt;
-    cin >> tt;
-    while (tt--)
-        solve();
     // solve();
+    int tt; cin >> tt; while (tt--) solve();
     // freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 }
