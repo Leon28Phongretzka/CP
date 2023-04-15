@@ -19,8 +19,6 @@ typedef long long ll;
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 
-// convert from adjancency list to matrix
-
 
 void solve()
 {
