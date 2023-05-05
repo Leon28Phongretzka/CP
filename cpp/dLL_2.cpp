@@ -7,7 +7,7 @@ typedef long double ld;
 #define mp make_pair
 #define gl getline
 #define pb push_back 
-#define eb emplace_back
+#define eb emplace_back 
 #define ob pop_back
 #define sz(s) ((int)(s.size()))
 #define UM uno\nrdered_map
