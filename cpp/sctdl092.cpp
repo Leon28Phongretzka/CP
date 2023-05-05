@@ -3,7 +3,7 @@ using namespace std;
 #define FAST_IO ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0); cerr.tie(0)
 typedef long long ll;
 typedef unsigned long long ul;
-typedef long double ld;
+typedef long double ld; 
 #define mp make_pair
 #define gl getline
 #define pb push_back
