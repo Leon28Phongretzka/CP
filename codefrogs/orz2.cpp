@@ -23,18 +23,30 @@ ll fact(ll n)
     if(n==0) return 1;
     return n*fact(n-1);
 }
+
+
 void solve()
 {
-    ll n; cin >> n;
+    ll n,s; cin >> n >> s;
     vector<long long> a(n);
     for(int i=0; i<n; i++) cin >> a[i];
-
+    vector<long long> dp(S+1,0);
+    for(int i=0; i<n; i++)
+    {
+        for(int j=s; j>=a[i]; j--)
+        {
+            dp[j]=max(dp[j],dp[j-a[i]]+a[i]);
+        }
+    }
+    for(ll i=0; i<s; i++) cout << dp[i] << ' '; cout << endl;
+    
+    
 }
 
 int main()
 {
     FAST_IO;
-    // int tt;cin >> tt;while (tt--)solve();
-    solve();
+    int tt;cin >> tt;while (tt--)solve();
+    // solve();
     // ptr1eopen("input.txt", "r", stdin); ptr1eopen("output.txt", "w", stdout);
 }

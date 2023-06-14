@@ -23,18 +23,27 @@ ll fact(ll n)
     if(n==0) return 1;
     return n*fact(n-1);
 }
+
+bool ok(ll n, ll k)
+{
+    if(n==k) return 1;
+    else if(n%3!=0) return 0;
+    else
+    {
+        return (ok(n/3,k) || ok(2*n/3,k));
+    }
+}
 void solve()
 {
-    ll n; cin >> n;
-    vector<long long> a(n);
-    for(int i=0; i<n; i++) cin >> a[i];
-
+    ll n,k; cin >> n >> k;
+    if(ok(n,k)) cout << "YES\n";
+    else cout << "NO\n";
 }
 
 int main()
 {
     FAST_IO;
-    // int tt;cin >> tt;while (tt--)solve();
-    solve();
+    int tt;cin >> tt;while (tt--)solve();
+    // solve();
     // ptr1eopen("input.txt", "r", stdin); ptr1eopen("output.txt", "w", stdout);
 }

@@ -23,18 +23,34 @@ ll fact(ll n)
     if(n==0) return 1;
     return n*fact(n-1);
 }
+
+
 void solve()
 {
     ll n; cin >> n;
-    vector<long long> a(n);
-    for(int i=0; i<n; i++) cin >> a[i];
-
+    vector<ll> a(n), check;
+    for(ll i=0; i<n; i++) cin >> a[i];
+    ll ans = 0, index = 0;
+    for(ll i=0; i<n; i++)
+    {
+        if(a[i]<=0)
+        {
+            a[i] = abs(a[i]);
+            index++;
+        }
+        ans+=a[i];
+    }
+    sort(a.begin(), a.end());
+    if(index&1) cout << ans - 2*a[0] << endl;
+    else cout << ans << endl;
+    
+    
 }
 
 int main()
 {
     FAST_IO;
-    // int tt;cin >> tt;while (tt--)solve();
-    solve();
+    int tt;cin >> tt;while (tt--)solve();
+    // solve();
     // ptr1eopen("input.txt", "r", stdin); ptr1eopen("output.txt", "w", stdout);
 }

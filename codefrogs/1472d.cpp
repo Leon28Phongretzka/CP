@@ -27,14 +27,33 @@ void solve()
 {
     ll n; cin >> n;
     vector<long long> a(n);
-    for(int i=0; i<n; i++) cin >> a[i];
-
+    for(int i=0; i<n; i++)
+    {
+        cin >> a[i];
+    }
+    ll ans = 0;
+    sort(a.begin(), a.end(), greater<ll>());
+    for(ll i=0; i<n; i++)
+    {
+        if(i%2==0)
+        {
+            if(a[i]%2==0) ans+=a[i];
+        }
+        else
+        {
+            if(a[i]%2==1) ans-=a[i];
+        }
+    }
+    cout << ans << endl;
+    if(ans<0) cout << "Bob\n";
+    else if(ans>0) cout << "Alice\n";
+    else cout << "Tie\n";
 }
 
 int main()
 {
     FAST_IO;
-    // int tt;cin >> tt;while (tt--)solve();
-    solve();
+    int tt;cin >> tt;while (tt--)solve();
+    // solve();
     // ptr1eopen("input.txt", "r", stdin); ptr1eopen("output.txt", "w", stdout);
 }
