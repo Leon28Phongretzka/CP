@@ -35,6 +35,14 @@ void solve()
             dp[i][j] = max(dp[i-1][j], dp[i-1][(j-a[i]+k)%k] + 1);
         }
     }
+    for(int i=1; i<=n; i++)
+    {
+        for(int j=0; j<k; j++)
+        {
+            cout << dp[i][j] << " ";
+        }
+        cout << endl;
+    }
     cout << dp[n][0] << endl;
     
 }

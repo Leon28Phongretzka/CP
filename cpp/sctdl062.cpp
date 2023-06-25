@@ -19,6 +19,31 @@ typedef long long ll;
 const double pi = 3.14159265358979323846;
 const int MOD = 1000000007;
 
+void sol(vector<int> arr, int k, int s)
+{
+    int n = arr.size();
+    vector<vector<int>> dp(k + 1, vector<int>(s + 1, 0));
+    dp[0][0] = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = k; j >= 1; j--)
+        {
+            for (int x = s; x >= arr[i - 1]; x--)
+            {
+                dp[j][x] += dp[j - 1][x - arr[i - 1]];
+            }
+        }
+    }
+    for(int i=1; i<=k; i++)
+    {
+        for(int j=0; j<=s; j++)
+        {
+            cout << dp[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
 int countArr(vector<int> arr, int k, int s)
 {
     int n = arr.size();
@@ -45,6 +70,7 @@ void solve()
     for (int i = 0; i < n; i++)
         cin >> arr[i];
     sort(arr.begin(), arr.end());
+    sol(arr, k, s);
     cout << countArr(arr, k, s) << endl;
 }
 

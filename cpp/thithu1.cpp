@@ -36,14 +36,7 @@ void solve()
         {
             for(ll k=1; k<=nC; k++)
             {
-                if(A[i]==B[j] && B[j]==C[k])
-                {
-                    dp[i][j][k] = dp[i-1][j-1][k-1] + 1;
-                }
-                else
-                {
-                    dp[i][j][k] = max(dp[i-1][j][k], max(dp[i][j-1][k], dp[i][j][k-1]));
-                }
+                if(A1)
             }
         }
     }
